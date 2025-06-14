@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap'); /*iItulo*/
+
+
+
+body {         
+    padding: 0 auto;  
+    margin: 0 auto; 
+}
+       
+/* Estilo del encabezado */
+#Titulo {           
+    color: #ffffff;
+    background-color: #c20909;
+    border-left: 5px solid #b71c1c;
+    border-radius: 0 8px 8px 0;
+    font-family: "Alfa Slab One", serif;
+    font-weight: 400;
+    font-style:italic;
+    font-size: 55px;
+    border-radius: 5px;
+    padding: 10px;          
+    border-bottom-style:ridge ;          
+    border-bottom-color: rgba(0, 0, 0, 0.719);
+    text-align: center;   
+    margin: 108px;
+    margin-top: 55px;
+} 
+
+/* Estilo del "SubTitulo" */
+
+#Articulo {     
+    color: rgb(0, 0, 0);;           
+    font-weight: 300;         
+    font-style: initial;        
+    font-size: 28px;       
+    padding: 15px;
+    text-align: center;
+    margin: 100px;    
+}
+
+/* Estilo de la Sección de PERSONAJES */
+
+#Personajes {
+    margin-top: 15px;
+    display: grid;
+    grid-template: repeat(5, 18%) / 400px repeat(3, 325px);
+    grid-template-areas: 
+    "Personaje1 Personaje2 Personaje3 Personaje4"
+    "Personaje1 Personaje2 Personaje3 Personaje4"
+    "Personaje5 Personaje6 Personaje7 Personaje8"
+    "Personaje5 Personaje6 Personaje7 Personaje8"
+    ;
+    justify-content: space-evenly;
+    align-content:  space-between;
+    align-items: start;
+    height: 200vh;
+    gap: 0.2rem;
+    
+}
+
+.personaje1, .personaje2, .personaje3, .personaje4,
+.personaje5, .personaje6, .personaje7, .personaje8 {
+    background: #910606;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 18px 24px;
+    min-width: 220px;
+    max-width: 260px;
+}
+
+.personaje1 h2, .personaje2 h2, .personaje3 h2, .personaje4 h2,
+.personaje5 h2, .personaje6 h2, .personaje7 h2, .personaje8 h2 {
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 35px;
+    color: #ffffff;
+}
+
+.personaje1 article, .personaje2 article, .personaje3 article, .personaje4 article,
+.personaje5 article, .personaje6 article, .personaje7 article, .personaje8 article {
+    font-size: 20px;
+    color:antiquewhite;
+    text-align: center;
+}
+
+/*Sector Hbilidades*/
+
+.TextoHabilidades {
+    margin-top: 15px;
+    color: #6d7f88;
+    background-color: #e93838;
+    border-left: 5px solid #b71c1c;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 18px;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1.1em;
+    width: 100%;
+}
+
+
+/*Sector de los botones*/
+
+button {
+    background-color: #c20909;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 18px;
+    font-family: "Alfa Slab One", serif;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 12px;
+}
+
+button:hover {
+    background-color: #b71c1c;
+    transform: scale(1.05);
+}
