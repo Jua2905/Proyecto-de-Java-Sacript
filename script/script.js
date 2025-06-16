@@ -102,9 +102,9 @@ const personajes = [
 function elegirPersonaje() {
     let personajeElegido = null;
     while (personajeElegido === null) {
-        let mensaje = "Elige un personaje:\n";
+        let mensaje = "Elige un personaje: /n´";
         personajes.forEach((p, i) => {
-            mensaje += `${i + 1}. ${p.nombre}\n`;
+            mensaje += `${i + 1}. ${p.nombre}/;
         });
 
         let eleccion = prompt(mensaje);
@@ -112,15 +112,15 @@ function elegirPersonaje() {
 
         if (indice >= 0 && indice < personajes.length) {
             personajeElegido = personajes[indice];
-            alert(`Elegiste: ${personajeElegido.nombre}`);
+            alert("Elegiste: " + personajeElegido.nombre);
             console.log("Personaje elegido:", personajeElegido.nombre);
             console.log("Habilidades:");
             personajeElegido.habilidades.forEach(hab => {
-                console.log(`- ${hab.nombre}: ${hab.valor}`);
-            });
+              console.log('- ${hab.nombre}: ${hab.valor}');
+            }
             // Mostrar en la página
-            document.body.innerHTML += `<p>Personaje elegido: <strong>${personajeElegido.nombre}</strong></p>`;
-            document.body.innerHTML += `<ul>${personajeElegido.habilidades.map(hab => `<li>${hab.nombre}: ${hab.valor}</li>`).join('')}</ul>`;
+           alert (personajeElegido.nombre);
+           alert (personajeElejido.Habilidades);
         } else {
             alert("Opción no válida. Intenta de nuevo.");
         }
@@ -128,6 +128,4 @@ function elegirPersonaje() {
     return personajeElegido;
 }
 
-elegirPersonaje();
-
-
+//elegirPersonaje(); function elegirRival () {elegirRival = null,} elegirRival ()
