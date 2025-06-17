@@ -101,6 +101,7 @@ const personajes = [
 
 function elegirPersonaje() {
     let personajeElegido = null;
+    let indiceElegido = -1;
     while (personajeElegido === null) {
         let mensaje = "Elige un personaje con su número:\n";
         personajes.forEach((p, i) => {
@@ -112,6 +113,7 @@ function elegirPersonaje() {
 
         if (indice >= 0 && indice < personajes.length) {
             personajeElegido = personajes[indice];
+            indiceElegido = indice;
             alert(`Elegiste: ${personajeElegido.nombre}`);
             console.log("Personaje elegido:", personajeElegido.nombre);
             console.log("Habilidades:");
@@ -125,23 +127,20 @@ function elegirPersonaje() {
             alert("Opción no válida. Intenta de nuevo.");
         }
     }
-    return personajeElegido;
+    return { personajeElegido, indiceElegido };
 }
 
-elegirPersonaje();
+const { personajeElegido, indiceElegido } = elegirPersonaje();
 
-const miPersonaje = elegirPersonaje;
+// elimina el personaje elegido
+const personajesCopia = personajes.slice();
+personajesCopia.splice(indiceElegido, 1);
 
-const personajesCopia = personajes.slice ();
-personajesCopia.splice (personjes, 1);
+// Elegir un personaje contrario aleatorio
+const Contrario = personajesCopia[Math.floor(Math.random() * personajesCopia.length)];
 
-console.log (personajes);
-console.log (personajesCopia);
-
-
-//Personaje Aleatoio
-const Contrario =
-personajesCopia [Math.floor(Math.random() * personajesCopia.legth)];
-
-console.log ('Tu rival es: ' + Contrario);
-
+console.log('Tu rival es: ' + Contrario.nombre);
+console.log('Habilidades del rival:');
+Contrario.habilidades.forEach(hab => {
+    console.log(`- ${hab.nombre}: ${hab.valor}`);
+});
