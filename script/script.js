@@ -99,6 +99,8 @@ const personajes = [
   }
 ];
 
+alert ('TODOS LOS PERSONAJES TIENEN 100 HP');
+
 function elegirPersonaje() {
     let personajeElegido = null;
     let indiceElegido = -1;
@@ -144,3 +146,43 @@ console.log('Habilidades del rival:');
 Contrario.habilidades.forEach(hab => {
     console.log(`- ${hab.nombre}: ${hab.valor}`);
 });
+
+//<>
+
+// Vida de los personajes (TODOS)
+
+let vidaDeMiPersonaje = 1000;
+let vidaDeRival = 1000;
+
+function batalla() {
+    let turno = 1;
+    while (vidaDeMiPersonaje > 0 && vidaDeRival > 0) {
+        console.log(`--- Turno ${turno} ---`);
+        
+        // Selecciona una habilidad aleatoria para cada uno
+        const habilidadMiPersonaje = personajeElegido.habilidades[Math.floor(Math.random() * personajeElegido.habilidades.length)];
+        const habilidadRival = Contrario.habilidades[Math.floor(Math.random() * Contrario.habilidades.length)];
+        
+        // Aplica el daño de las habilidades 
+        vidaDeRival = Math.max(0, vidaDeRival - habilidadMiPersonaje.valor);
+        vidaDeMiPersonaje = Math.max(0, vidaDeMiPersonaje - habilidadRival.valor);
+        
+        console.log(`${personajeElegido.nombre} ataca con ${habilidadMiPersonaje.nombre} (${habilidadMiPersonaje.valor})`);
+        console.log(`${Contrario.nombre} ataca con ${habilidadRival.nombre} (${habilidadRival.valor})`);
+        console.log(`Vida de ${personajeElegido.nombre}: ${vidaDeMiPersonaje}`);
+        console.log(`Vida de ${Contrario.nombre}: ${vidaDeRival}`);
+        console.log('----------------------');
+        
+        turno++;
+    }
+    
+    if (vidaDeMiPersonaje <= 0 && vidaDeRival <= 0) {
+        console.log("¡Empate! Ambos han caído.");
+    } else if (vidaDeMiPersonaje <= 0) {
+        console.log(`¡${Contrario.nombre} gana la batalla!`);
+    } else {
+        console.log(`¡${personajeElegido.nombre} gana la batalla!`);
+    }
+}
+
+batalla();
