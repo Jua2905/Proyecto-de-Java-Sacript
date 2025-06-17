@@ -99,7 +99,7 @@ const personajes = [
   }
 ];
 
-alert ('TODOS LOS PERSONAJES TIENEN 100 HP');
+alert ('TODOS LOS PERSONAJES TIENEN 1000 HP');
 
 function elegirPersonaje() {
     let personajeElegido = null;
