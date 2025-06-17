@@ -102,7 +102,7 @@ const personajes = [
 function elegirPersonaje() {
     let personajeElegido = null;
     while (personajeElegido === null) {
-        let mensaje = "Elige un personaje con s número:\n";
+        let mensaje = "Elige un personaje con su número:\n";
         personajes.forEach((p, i) => {
             mensaje += `${i + 1}. ${p.nombre}\n`;
         });
@@ -130,10 +130,10 @@ function elegirPersonaje() {
 
 elegirPersonaje();
 
-const miPersonaje = personajes[eleccion];
+const miPersonaje = elegirPersonaje;
 
 const personajesCopia = personajes.slice ();
-personajesCopia.splice (eleccion, 1);
+personajesCopia.splice (personjes, 1);
 
 console.log (personajes);
 console.log (personajesCopia);
@@ -144,3 +144,4 @@ const Contrario =
 personajesCopia [Math.floor(Math.random() * personajesCopia.legth)];
 
 console.log ('Tu rival es: ' + Contrario);
+
