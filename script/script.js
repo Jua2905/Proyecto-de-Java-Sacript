@@ -6,23 +6,51 @@
 //while (contrasena !== '1234') {
     //contrasena = prompt('Ingrese la contraseña secreta para acceder al simulador:');
     //if (contrasena !== '1234') {
-        //alert('Contraseña incorrecta, intente nuevamente.');
+      //alert('Contraseña incorrecta, intente nuevamente.');
     //}
-//}
+  //}
+
 //alert('Contraseña correcta, accediendo a' + ' SIMULADOR DE PELEAS DE LOS VENGADORES');
 
-function saludar () {
-    console.log('¡Bienvenido al SIMULADOR DE PELEAS DE LOS VENGADORES!');
-    console.log('Selecciona bien a tus personaje favorito para la batalla.');
+//function saludar () {
+  //console.log('¡Bienvenido al SIMULADOR DE PELEAS DE LOS VENGADORES!');
+  //console.log('Selecciona bien a tus personaje favorito para la batalla.');
+//}
+
+//saludar ();
+
+
+//Usuarios
+const saludo = document.getElementById("saludo");
+const botonGuardar = document.getElementById("guardarNombre");
+const botonEliminar = document.getElementById("eliminarNombre");
+
+
+// Guardar nombre
+botonGuardar.addEventListener("click", () => {
+  const nombre = prompt("Ingrese su nombre ESTIMADO:");
+  if (nombre) {
+    localStorage.setItem("nombreUsuario", nombre);
+    saludo.textContent = `Hola: ${nombre}`;
+  }
+});
+
+
+// Eliminar nombre
+botonEliminar.addEventListener("click", () => {
+  localStorage.removeItem("nombreUsuario");
+  saludo.textContent = "Hola:";
+});
+
+
+// Mostrar el nombre guardado al cargar la página
+const nombreGuardado = localStorage.getItem("nombreUsuario");
+if (nombreGuardado) {
+  saludo.textContent = `Hola: ${nombreGuardado}`;
 }
 
-saludar ();
 
-//function Usuario () {
-    //let NombreUsuario = prompt ('Ingrese su usuario');
-    //console.log ('Nombre del Usuario es: ' + NombreUsuario);}
-
- //Usuario ();
+//Personajes y sus ARRAY
 
 const personajes = [
   {

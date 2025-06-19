@@ -43,7 +43,7 @@ body {
 #Personajes {
     margin-top: 15px;
     display: grid;
-    grid-template: repeat(5, 18%) / 400px repeat(3, 325px);
+    grid-template: repeat(5, 25%) / 400px repeat(3, 325px);
     grid-template-areas: 
     "Personaje1 Personaje2 Personaje3 Personaje4"
     "Personaje1 Personaje2 Personaje3 Personaje4"
@@ -68,8 +68,8 @@ body {
     max-width: 260px;
 }
 
-.personaje1 h2, .personaje2 h2, .personaje3 h2, .personaje4 h2,
-.personaje5 h2, .personaje6 h2, .personaje7 h2, .personaje8 h2 {
+.personaje1 h3, .personaje2 h3, .personaje3 h3, .personaje4 h3,
+.personaje5 h3, .personaje6 h3, .personaje7 h3, .personaje8 h3 {
     margin-top: 12px;
     margin-bottom: 10px;
     font-size: 35px;
