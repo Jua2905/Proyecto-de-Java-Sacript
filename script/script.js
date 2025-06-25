@@ -127,8 +127,6 @@ const personajes = [
   }
 ];
 
-alert ('TODOS LOS PERSONAJES TIENEN 1000 HP');
-
 function elegirPersonaje() {
     let personajeElegido = null;
     let indiceElegido = -1;
@@ -214,3 +212,24 @@ function batalla() {
 }
 
 batalla();
+
+
+//Contador de Wins
+
+let victoriasDeMiPersonaje = parseInt(localStorage.getItem ("--Victorias de mi PERSONAJE--")) || 0;
+
+let victoriasDeRival = parseInt(localStorage.getItem ("--Victorias de RIVAL--")) || 0;
+
+function actualizarVictorias() {
+  if (vidaDeMiPersonaje <= 0 && vidaDeRival <= 0) {
+    // Empate, no suma
+  } else if (vidaDeMiPersonaje <= 0) {
+    victoriasDeRival++;
+    localStorage.setItem("victoriasRival", victoriasDeRival);
+  } else if (vidaDeRival <= 0) {
+    victoriasDeMiPersonaje++;
+    localStorage.setItem("victoriasMiPersonaje", victoriasDeMiPersonaje);
+  }
+}
+
+actualizarVictorias ();
