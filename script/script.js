@@ -233,3 +233,18 @@ function actualizarVictorias() {
 }
 
 actualizarVictorias ();
+
+
+//Sector de puntos 
+
+
+let puntosObtenidos = parseInt(localStorage.getItem("--Puntos Iniciales--")) || 0;
+
+function puntos () {
+  if (victoriasDeMiPersonaje = 1){
+    puntosObtenidos = puntosObtenidos + 100;
+    localStorage.setItem("PUNTOS OBTENIDOS", puntosObtenidos);
+  }
+}
+
+puntos ();
