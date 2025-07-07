@@ -127,124 +127,65 @@ const personajes = [
   }
 ];
 
-function elegirPersonaje() {
-    let personajeElegido = null;
-    let indiceElegido = -1;
-    while (personajeElegido === null) {
-        let mensaje = "Elige un personaje con su número:\n";
-        personajes.forEach((p, i) => {
-            mensaje += `${i + 1}. ${p.nombre}\n`;
-        });
 
-        let eleccion = prompt(mensaje);
-        let indice = parseInt(eleccion, 10) - 1;
+// Selección de personaje 
+const botonesElegir = document.querySelectorAll('#Personajes button');
+let personajeElegido = null;
+let indiceElegido = -1;
 
-        if (indice >= 0 && indice < personajes.length) {
-            personajeElegido = personajes[indice];
-            indiceElegido = indice;
-            alert(`Elegiste: ${personajeElegido.nombre}`);
-            console.log("Personaje elegido:", personajeElegido.nombre);
-            console.log("Habilidades:");
-            personajeElegido.habilidades.forEach(hab => {
-                console.log(`- ${hab.nombre}: ${hab.valor}`);
-            });
-            // Mostrar en la página
-            document.body.innerHTML += `<p>Personaje elegido: <strong>${personajeElegido.nombre}</strong></p>`;
-            document.body.innerHTML += `<ul>${personajeElegido.habilidades.map(hab => `<li>${hab.nombre}: ${hab.valor}</li>`).join('')}</ul>`;
-        } else {
-            alert("Opción no válida. Intenta de nuevo.");
-        }
-    }
-    return { personajeElegido, indiceElegido };
-}
+botonesElegir.forEach((boton, i) => {
+  boton.addEventListener('click', () => {
+    personajeElegido = personajes[i];
+    indiceElegido = i; 
+    document.getElementById('Articulo').innerHTML = `Elegiste: <strong>${personajeElegido.nombre}</strong><br>
+      <ul>${personajeElegido.habilidades.map(hab => `<li>${hab.nombre}: ${hab.valor}</li>`).join('')}</ul>`;
+    botonesElegir.forEach(b => b.disabled = true);
+    iniciarBatalla();
+  });
+});
+  
 
-const { personajeElegido, indiceElegido } = elegirPersonaje();
 
-// elimina el personaje elegido
+// Elimina el personaje elegido del array copia
 const personajesCopia = personajes.slice();
 personajesCopia.splice(indiceElegido, 1);
+  
 
-// Elegir un personaje contrario aleatorio
+
+// Elegir rival aleatorio
 const Contrario = personajesCopia[Math.floor(Math.random() * personajesCopia.length)];
-
-console.log('Tu rival es: ' + Contrario.nombre);
-console.log('Habilidades del rival:');
-Contrario.habilidades.forEach(hab => {
-    console.log(`- ${hab.nombre}: ${hab.valor}`);
-});
-
-//<>
-
-// Vida de los personajes (TODOS)
-
 let vidaDeMiPersonaje = 1000;
 let vidaDeRival = 1000;
-
-function batalla() {
-    let turno = 1;
-    while (vidaDeMiPersonaje > 0 && vidaDeRival > 0) {
-        console.log(`--- Turno ${turno} ---`);
-        
-        // Selecciona una habilidad aleatoria para cada uno
-        const habilidadMiPersonaje = personajeElegido.habilidades[Math.floor(Math.random() * personajeElegido.habilidades.length)];
-        const habilidadRival = Contrario.habilidades[Math.floor(Math.random() * Contrario.habilidades.length)];
-        
-        // Aplica el daño de las habilidades 
-        vidaDeRival = Math.max(0, vidaDeRival - habilidadMiPersonaje.valor);
-        vidaDeMiPersonaje = Math.max(0, vidaDeMiPersonaje - habilidadRival.valor);
-        
-        console.log(`${personajeElegido.nombre} ataca con ${habilidadMiPersonaje.nombre} (${habilidadMiPersonaje.valor})`);
-        console.log(`${Contrario.nombre} ataca con ${habilidadRival.nombre} (${habilidadRival.valor})`);
-        console.log(`Vida de ${personajeElegido.nombre}: ${vidaDeMiPersonaje}`);
-        console.log(`Vida de ${Contrario.nombre}: ${vidaDeRival}`);
-        console.log('----------------------');
-        
-        turno++;
-    }
-    
-    if (vidaDeMiPersonaje <= 0 && vidaDeRival <= 0) {
-        console.log("¡Empate! Ambos han caído.");
-    } else if (vidaDeMiPersonaje <= 0) {
-        console.log(`¡${Contrario.nombre} gana la batalla!`);
-    } else {
-        console.log(`¡${personajeElegido.nombre} gana la batalla!`);
-    }
-}
-
-batalla();
+let turno = 1;
 
 
-//Contador de Wins
 
-let victoriasDeMiPersonaje = parseInt(localStorage.getItem ("--Victorias de mi PERSONAJE--")) || 0;
 
-let victoriasDeRival = parseInt(localStorage.getItem ("--Victorias de RIVAL--")) || 0;
-
-function actualizarVictorias() {
+function iniciarBatalla() {
+  let resultado = '';
+  let clase = '';
   if (vidaDeMiPersonaje <= 0 && vidaDeRival <= 0) {
-    // Empate, no suma
+    resultado = "¡Empate! Los dos son MUY FUERTES.";
+    clase = "empate";
   } else if (vidaDeMiPersonaje <= 0) {
+    resultado = `¡${Contrario.nombre} gana la batalla!`;
+    clase = "perdedor";
+    let victoriasDeRival = parseInt(localStorage.getItem("victoriasRival")) || 0;
     victoriasDeRival++;
     localStorage.setItem("victoriasRival", victoriasDeRival);
-  } else if (vidaDeRival <= 0) {
+  } else {
+    resultado = `¡${personajeElegido.nombre} gana la batalla!`;
+    clase = "ganador";
+    let victoriasDeMiPersonaje = parseInt(localStorage.getItem("victoriasMiPersonaje")) || 0;
     victoriasDeMiPersonaje++;
     localStorage.setItem("victoriasMiPersonaje", victoriasDeMiPersonaje);
-  }
-}
-
-actualizarVictorias ();
-
-
-//Sector de puntos 
-
-
-let puntosObtenidos = parseInt(localStorage.getItem("--Puntos Iniciales--")) || 0;
-
-function puntos () {
-  if (victoriasDeMiPersonaje = 1){
-    puntosObtenidos = puntosObtenidos + 100;
+    let puntosObtenidos = parseInt(localStorage.getItem("PUNTOS OBTENIDOS")) || 0;
+    puntosObtenidos += 100;
     localStorage.setItem("PUNTOS OBTENIDOS", puntosObtenidos);
+    resultado += `<br><strong>Puntos obtenidos: ${puntosObtenidos}</strong>`;
   }
+  const resultadoDiv = document.getElementById('resultado');
+  resultadoDiv.innerHTML = `<span class="${clase}">${resultado}</span>`;
 }
 
-puntos ();
+
