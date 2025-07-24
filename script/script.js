@@ -128,10 +128,55 @@ const personajes = [
 ];
 
 
+// --- CONTROL DE ESCENAS ---
+function mostrarEscena(id) {
+  document.getElementById('escena-elegir').style.display = (id === 'elegir') ? 'block' : 'none';
+  document.getElementById('escena-batalla').style.display = (id === 'batalla') ? 'block' : 'none';
+  document.getElementById('escena-resultado').style.display = (id === 'resultado') ? 'block' : 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Botones de navegación de escenas
+  const btnIrBatalla = document.getElementById('btn-ir-batalla');
+  const btnVerResultado = document.getElementById('btn-ver-resultado');
+  const btnVolverInicio1 = document.getElementById('btn-volver-inicio1');
+  const btnVolverInicio2 = document.getElementById('btn-volver-inicio2');
+
+  if (btnIrBatalla) {
+    btnIrBatalla.addEventListener('click', function() {
+      mostrarEscena('batalla');
+    });
+  }
+  if (btnVerResultado) {
+    btnVerResultado.addEventListener('click', function() {
+      // Simular batalla y mostrar resultado en la sección correspondiente
+      mostrarResultadoBatalla();
+      mostrarEscena('resultado');
+    });
+  }
+  if (btnVolverInicio1) {
+    btnVolverInicio1.addEventListener('click', function() {
+      mostrarEscena('elegir');
+      // Opcional: resetear selección de personaje aquí si lo deseas
+      location.reload();
+    });
+  }
+  if (btnVolverInicio2) {
+    btnVolverInicio2.addEventListener('click', function() {
+      mostrarEscena('elegir');
+      location.reload();
+    });
+  }
+  // Mostrar escena inicial
+  mostrarEscena('elegir');
+});
+
+
 // Selección de personaje 
 const botonesElegir = document.querySelectorAll('#Personajes button');
 let personajeElegido = null;
 let indiceElegido = -1;
+let Contrario = null;
 
 botonesElegir.forEach((boton, i) => {
   boton.addEventListener('click', () => {
@@ -140,34 +185,47 @@ botonesElegir.forEach((boton, i) => {
     document.getElementById('Articulo').innerHTML = `Elegiste: <strong>${personajeElegido.nombre}</strong><br>
       <ul>${personajeElegido.habilidades.map(hab => `<li>${hab.nombre}: ${hab.valor}</li>`).join('')}</ul>`;
     botonesElegir.forEach(b => b.disabled = true);
-    iniciarBatalla();
+
+    // Elegir rival aleatorio distinto al elegido
+    const personajesCopia = personajes.slice();
+    personajesCopia.splice(indiceElegido, 1);
+    Contrario = personajesCopia[Math.floor(Math.random() * personajesCopia.length)];
+
+    // Mostrar info de batalla en su sección
+    const batallaInfo = document.getElementById('batalla-info');
+    batallaInfo.innerHTML = `
+      <div>
+        <h4>Tu personaje:</h4>
+        <strong>${personajeElegido.nombre}</strong>
+        <ul>${personajeElegido.habilidades.map(hab => `<li>${hab.nombre}: ${hab.valor}</li>`).join('')}</ul>
+      </div>
+      <div>
+        <h4>Rival:</h4>
+        <strong>${Contrario.nombre}</strong>
+        <ul>${Contrario.habilidades.map(hab => `<li>${hab.nombre}: ${hab.valor}</li>`).join('')}</ul>
+      </div>
+    `;
+
+    mostrarEscena('batalla');
   });
 });
-  
 
 
-// Elimina el personaje elegido del array copia
-const personajesCopia = personajes.slice();
-personajesCopia.splice(indiceElegido, 1);
-  
-
-
-// Elegir rival aleatorio
-const Contrario = personajesCopia[Math.floor(Math.random() * personajesCopia.length)];
-let vidaDeMiPersonaje = 1000;
-let vidaDeRival = 1000;
-let turno = 1;
-
-
-
-
-function iniciarBatalla() {
+// Lógica de batalla y mostrar resultado en la sección correcta
+function mostrarResultadoBatalla() {
+  if (!personajeElegido || !Contrario) return;
+  // Puedes personalizar la lógica de batalla aquí
   let resultado = '';
   let clase = '';
-  if (vidaDeMiPersonaje <= 0 && vidaDeRival <= 0) {
+  // Suma de habilidades para determinar ganador simple
+  const sumaHabilidades = arr => arr.reduce((acc, h) => acc + h.valor, 0);
+  const puntosJugador = sumaHabilidades(personajeElegido.habilidades);
+  const puntosRival = sumaHabilidades(Contrario.habilidades);
+
+  if (puntosJugador === puntosRival) {
     resultado = "¡Empate! Los dos son MUY FUERTES.";
     clase = "empate";
-  } else if (vidaDeMiPersonaje <= 0) {
+  } else if (puntosJugador < puntosRival) {
     resultado = `¡${Contrario.nombre} gana la batalla!`;
     clase = "perdedor";
     let victoriasDeRival = parseInt(localStorage.getItem("victoriasRival")) || 0;
