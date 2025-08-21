@@ -271,3 +271,72 @@ body {
     letter-spacing: 1px;
     transition: background 0.3s, border 0.3s;
 }
+
+/* Dark mode */
+body.dark-mode {
+    background: linear-gradient(135deg, #181818 0%, #222 100%);
+    color: #eee;
+}
+body.dark-mode #Titulo,
+body.dark-mode #saludo,
+body.dark-mode #Articulo,
+body.dark-mode #resultado,
+body.dark-mode #batalla-info {
+    background: #222 !important;
+    color: #fff !important;
+    border-color: #444 !important;
+}
+body.dark-mode .TextoHabilidades {
+    background-color: #333 !important;
+    color: #fff !important;
+    border-left: 5px solid #c20909 !important;
+}
+body.dark-mode .personaje1, 
+body.dark-mode .personaje2, 
+body.dark-mode .personaje3, 
+body.dark-mode .personaje4,
+body.dark-mode .personaje5, 
+body.dark-mode .personaje6, 
+body.dark-mode .personaje7, 
+body.dark-mode .personaje8 {
+    background: linear-gradient(135deg, #222 60%, #333 100%) !important;
+    border-color: #c20909 !important;
+}
+body.dark-mode button,
+body.dark-mode #guardarNombre, 
+body.dark-mode #eliminarNombre,
+body.dark-mode #btn-ir-batalla,
+body.dark-mode #btn-ver-resultado,
+body.dark-mode #btn-volver-inicio1,
+body.dark-mode #btn-volver-inicio2 {
+    background: linear-gradient(90deg, #333 60%, #c20909 100%) !important;
+    color: #fff !important;
+    border: none !important;
+}
+body.dark-mode input[type="text"] {
+    background: #222;
+    color: #fff;
+    border: 1px solid #c20909;
+}
+#busqueda {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid #c20909;
+    outline: none;
+    margin-bottom: 20px;
+}
+#darkModeBtn {
+    border-radius: 8px;
+    padding: 8px 20px;
+    background: linear-gradient(90deg, #c20909 60%, #b71c1c 100%);
+    color: #fff;
+    border: none;
+    font-family: "Alfa Slab One", serif;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    transition: background 0.2s, transform 0.2s;
+}
+#darkModeBtn:hover {
+    background: linear-gradient(90deg, #b71c1c 60%, #c20909 100%);
+    transform: scale(1.07);
+}
